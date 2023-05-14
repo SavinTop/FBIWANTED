@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "fbiwanted-858d1"
+  },
+  "targets": {
+    "fbiwanted-858d1": {
+      "hosting": {
+        "fbiwanted": [
+          "fbiwanted-858d1"
+        ]
+      }
+    }
+  }
+}
