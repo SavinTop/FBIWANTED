@@ -3,8 +3,7 @@ import { Component,
 	ChangeDetectorRef,
 	OnInit,
 	OnDestroy } from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
-import {LoginComponent} from '../../auth/login/login.component'
+import {LoginFormService} from 'src/app/auth/login-form.service';
 import {AuthService} from '../../auth/auth.service'
 
 @Component({
@@ -17,11 +16,7 @@ export class HeaderComponent{
 title = 'fbi wanted';
 
   constructor(
-	public auth: AuthService,
-	public loginDialog: MatDialog,
+	  public auth: AuthService,
+	  public loginform: LoginFormService
 	){}
-	
-  openLoginDialog(): void {
-    this.loginDialog.open(LoginComponent);
-  }
 }

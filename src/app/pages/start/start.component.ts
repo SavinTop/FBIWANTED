@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../auth/auth.service'
-import {MatDialog} from '@angular/material/dialog';
-import {LoginComponent} from '../../auth/login/login.component'
+import {AuthService} from 'src/app/auth/auth.service';
+import {LoginFormService} from 'src/app/auth/login-form.service';
+import { NameFromEmailPipe } from 'src/app/shared/name-from-email.pipe';
 
 @Component({
   selector: 'app-start',
@@ -9,12 +9,10 @@ import {LoginComponent} from '../../auth/login/login.component'
   styleUrls: ['./start.component.css']
 })
 export class StartComponent {
-	constructor(
-		public auth:AuthService,
-		public loginDialog: MatDialog
-	){}
 	
-	openLoginDialog(): void {
-    this.loginDialog.open(LoginComponent);
-  }
+	constructor(
+		public loginform: LoginFormService,
+		public auth: AuthService
+	){}
+
 }

@@ -1,9 +1,15 @@
 <mat-toolbar class="flex justify-between">
-	<span class="flex flex-col">
-	<span>{{title | titlecase}}</span>
-	<span *ngIf="auth.userData$ | async"
-	class="flex text-sm text-slate-500 items-center justify-center">{{(auth.userData$.value!.email ?? "") | nameFromEmail}}</span>
-	</span>
-	<button mat-raised-button color="primary" *ngIf="!(auth.userData$ | async)" (click)="openLoginDialog()">Login</button>
-	<button mat-raised-button color="primary" *ngIf="auth.userData$ | async" (click)="auth.SignOut()">Logout</button>
+	<ng-container *ngIf="auth.userData$ | async as userData; else unauthorized">
+		<span class="flex flex-col">
+			<span>{{title | titlecase}}</span>
+			<span class="flex text-sm text-slate-500 items-center justify-center">
+				{{(userData!.email ?? "") | nameFromEmail}}
+			</span>
+		</span>
+		<button mat-raised-button color="primary" (click)="auth.SignOut()">Logout</button>
+	</ng-container>
+	<ng-template #unauthorized>	
+		<span>{{title | titlecase}}</span>
+		<button mat-raised-button color="primary" (click)="loginform.open()">Login</button>
+	</ng-template>
 </mat-toolbar>

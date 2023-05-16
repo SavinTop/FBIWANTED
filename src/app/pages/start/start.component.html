@@ -1,6 +1,6 @@
 <div class="flex justify-center items-center">
 	
-	<div *ngIf="auth.userData$.value" class="flex flex-col pad-6 justify-center items-center p-14">
+	<div *ngIf="auth.userData$ | async; else unauthorized" class="flex flex-col pad-6 justify-center items-center p-14">
 	<h1>Welcome, {{(auth.userData$.value!.email ?? '') | nameFromEmail}}</h1>
 	<p>orem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod arcu ut eros efficitur aliquet. Vestibulum posuere dui ac massa convallis porttitor. Donec lacinia nulla faucibus mauris feugiat efficitur. Sed eu nunc eu nisl rutrum dignissim. Donec ac arcu sed mauris ullamcorper sagittis. Aenean fringilla libero sed laoreet tempor. Nunc a laoreet purus. In ut bibendum eros. Fusce consequat quam id hendrerit tincidunt. Nunc bibendum libero in lectus sodales varius. Duis tempus massa et faucibus finibus. Vivamus sagittis, neque at semper eleifend, neque leo fringilla lorem, id pretium purus neque sed nisl.
 
@@ -13,11 +13,12 @@ Donec mattis dictum nisl sit amet bibendum. Aliquam id libero nibh. Vestibulum i
 Suspendisse vulputate risus non nisi imperdiet accumsan. Donec in augue in nulla lacinia luctus. Quisque feugiat elit urna, gravida sodales dui cursus et. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed tellus eros, iaculis id rutrum sit amet, tincidunt blandit nunc. Pellentesque et porta sem, non vestibulum metus. Sed posuere mauris ut ipsum dictum consequat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis viverra consectetur sem, et blandit turpis tincidunt id.</p>
 	</div>
 	
-	<div *ngIf="!auth.userData$.value" class="flex flex-col grow shrink-0 pad-6 justify-center items-center p-10">
+	<ng-template #unauthorized>
+	<div class="flex flex-col grow shrink-0 pad-6 justify-center items-center p-10">
 	<h1>Please, login</h1>
-	<button mat-raised-button color="primary" *ngIf="!auth.userData$.value" (click)="openLoginDialog()">Login</button>
+	<button mat-raised-button color="primary" *ngIf="!auth.userData$.value" (click)="loginform.open()">Login</button>
 	</div>
-	
+	</ng-template>
 	
 	
 	
