@@ -32,7 +32,7 @@ private router: Router
     });
 	}
 
-SignIn(email: string, password: string) {
+async SignIn(email: string, password: string) {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .catch((error) => {
@@ -40,10 +40,12 @@ SignIn(email: string, password: string) {
       });
   }
 
-SignOut() {
+async SignOut() {
 	this.router.navigateByUrl('/')
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
     });
   }
+
+
 }
