@@ -4,12 +4,14 @@ import { Component,
 	OnInit,
 	OnDestroy } from '@angular/core';
 import {LoginFormService} from 'src/app/auth/login-form.service';
+import {AuthState} from 'src/app/auth/models/auth-state.service';
 import {AuthService} from '../../auth/auth.service'
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
+  
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent{

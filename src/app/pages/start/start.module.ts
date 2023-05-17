@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { StartComponent } from './start.component';
 import {SharedModule} from 'src/app/shared/shared/shared.module';
 import {MaterialModule} from 'src/app/material/material.module';
-
+import { AuthService } from 'src/app/auth/auth.service';
 
 const routes: Routes = [
   { path: '', component: StartComponent }
@@ -19,6 +19,6 @@ const routes: Routes = [
 	SharedModule,
 	MaterialModule,
     RouterModule.forChild(routes)
-  ]
+  ],
 })
 export class StartModule { }

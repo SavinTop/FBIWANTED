@@ -1,25 +1,30 @@
 <div class="flex justify-center items-center">
-	
-	<div *ngIf="auth.userData$ | async; else unauthorized" class="flex flex-col pad-6 justify-center items-center p-14">
-	<h1>Welcome, {{(auth.userData$.value!.email ?? '') | nameFromEmail}}</h1>
-	<p>orem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod arcu ut eros efficitur aliquet. Vestibulum posuere dui ac massa convallis porttitor. Donec lacinia nulla faucibus mauris feugiat efficitur. Sed eu nunc eu nisl rutrum dignissim. Donec ac arcu sed mauris ullamcorper sagittis. Aenean fringilla libero sed laoreet tempor. Nunc a laoreet purus. In ut bibendum eros. Fusce consequat quam id hendrerit tincidunt. Nunc bibendum libero in lectus sodales varius. Duis tempus massa et faucibus finibus. Vivamus sagittis, neque at semper eleifend, neque leo fringilla lorem, id pretium purus neque sed nisl.
 
-Nam venenatis turpis laoreet massa fermentum, porta venenatis nulla elementum. Fusce varius dui vitae dui auctor fermentum. Morbi id varius metus. Suspendisse vitae hendrerit mi. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim odio nunc, quis gravida felis ornare vitae. Morbi cursus lorem quis tortor dictum, vitae ultrices eros sollicitudin. In lobortis eget mi sit amet tincidunt. Donec tincidunt nisl eget felis volutpat, at efficitur tortor sodales.
+	<ng-container [ngSwitch]="auth.state$ | async">
+		<ng-template [ngSwitchCase]="auth.AuthState.authorized">
+			<div class="flex flex-col pad-6 justify-center items-center p-14">
+				<h1>Welcome, {{(auth.userData$.value!.email ?? '') | nameFromEmail}}</h1>
+				<p>orem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod arcu ut eros efficitur aliquet. Vestibulum posuere dui ac massa convallis porttitor. Donec lacinia nulla faucibus mauris feugiat efficitur. Sed eu nunc eu nisl rutrum dignissim. Donec ac arcu sed mauris ullamcorper sagittis. Aenean fringilla libero sed laoreet tempor. Nunc a laoreet purus. In ut bibendum eros. Fusce consequat quam id hendrerit tincidunt. Nunc bibendum libero in lectus sodales varius. Duis tempus massa et faucibus finibus. Vivamus sagittis, neque at semper eleifend, neque leo fringilla lorem, id pretium purus neque sed nisl.
 
-Aliquam sit amet aliquam nulla, luctus lacinia dui. Proin vitae malesuada orci. Praesent tincidunt suscipit gravida. Fusce imperdiet lectus risus, ut posuere dolor bibendum in. Nullam maximus sem quis enim congue, ac sodales dolor laoreet. Nulla facilisi. Cras urna elit, vehicula sit amet bibendum non, vehicula ut augue. Phasellus justo nunc, bibendum sed dui id, malesuada condimentum nisl. Fusce eu dignissim tortor. Fusce placerat consequat mauris, sit amet iaculis nibh aliquam ac. Pellentesque eu orci enim. Suspendisse sollicitudin ante tortor, sit amet eleifend augue dignissim cursus. Integer ultricies rutrum nunc nec efficitur. Aenean id erat sed lectus finibus efficitur. Nam vulputate euismod urna, et posuere eros placerat eget. Sed sit amet nibh nec turpis lacinia semper vitae quis lacus.
+				Nam venenatis turpis laoreet massa fermentum, porta venenatis nulla elementum. Fusce varius dui vitae dui auctor fermentum. Morbi id varius metus. Suspendisse vitae hendrerit mi. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim odio nunc, quis gravida felis ornare vitae. Morbi cursus lorem quis tortor dictum, vitae ultrices eros sollicitudin. In lobortis eget mi sit amet tincidunt. Donec tincidunt nisl eget felis volutpat, at efficitur tortor sodales.
 
-Donec mattis dictum nisl sit amet bibendum. Aliquam id libero nibh. Vestibulum id justo ac quam consequat convallis nec nec neque. Mauris quam nunc, bibendum a bibendum quis, fermentum ac nulla. Aliquam at imperdiet quam, eget aliquam augue. Aliquam quis elit in neque luctus rutrum. Nunc sagittis, purus quis varius facilisis, felis diam pretium quam, a eleifend massa justo in mi. Nam volutpat aliquet feugiat. In quis tristique tortor. Maecenas in finibus justo. Duis porttitor et purus et malesuada. Fusce imperdiet at lectus ac mattis. Aliquam pharetra leo quis ex gravida tempus. Suspendisse luctus elit urna, quis dignissim nibh venenatis id. Vivamus bibendum nulla justo, eu convallis nisl tempor eget.
+				Aliquam sit amet aliquam nulla, luctus lacinia dui. Proin vitae malesuada orci. Praesent tincidunt suscipit gravida. Fusce imperdiet lectus risus, ut posuere dolor bibendum in. Nullam maximus sem quis enim congue, ac sodales dolor laoreet. Nulla facilisi. Cras urna elit, vehicula sit amet bibendum non, vehicula ut augue. Phasellus justo nunc, bibendum sed dui id, malesuada condimentum nisl. Fusce eu dignissim tortor. Fusce placerat consequat mauris, sit amet iaculis nibh aliquam ac. Pellentesque eu orci enim. Suspendisse sollicitudin ante tortor, sit amet eleifend augue dignissim cursus. Integer ultricies rutrum nunc nec efficitur. Aenean id erat sed lectus finibus efficitur. Nam vulputate euismod urna, et posuere eros placerat eget. Sed sit amet nibh nec turpis lacinia semper vitae quis lacus.
 
-Suspendisse vulputate risus non nisi imperdiet accumsan. Donec in augue in nulla lacinia luctus. Quisque feugiat elit urna, gravida sodales dui cursus et. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed tellus eros, iaculis id rutrum sit amet, tincidunt blandit nunc. Pellentesque et porta sem, non vestibulum metus. Sed posuere mauris ut ipsum dictum consequat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis viverra consectetur sem, et blandit turpis tincidunt id.</p>
-	</div>
-	
-	<ng-template #unauthorized>
-	<div class="flex flex-col grow shrink-0 pad-6 justify-center items-center p-10">
-	<h1>Please, login</h1>
-	<button mat-raised-button color="primary" *ngIf="!auth.userData$.value" (click)="loginform.open()">Login</button>
-	</div>
-	</ng-template>
-	
-	
-	
+				Donec mattis dictum nisl sit amet bibendum. Aliquam id libero nibh. Vestibulum id justo ac quam consequat convallis nec nec neque. Mauris quam nunc, bibendum a bibendum quis, fermentum ac nulla. Aliquam at imperdiet quam, eget aliquam augue. Aliquam quis elit in neque luctus rutrum. Nunc sagittis, purus quis varius facilisis, felis diam pretium quam, a eleifend massa justo in mi. Nam volutpat aliquet feugiat. In quis tristique tortor. Maecenas in finibus justo. Duis porttitor et purus et malesuada. Fusce imperdiet at lectus ac mattis. Aliquam pharetra leo quis ex gravida tempus. Suspendisse luctus elit urna, quis dignissim nibh venenatis id. Vivamus bibendum nulla justo, eu convallis nisl tempor eget.
+
+				Suspendisse vulputate risus non nisi imperdiet accumsan. Donec in augue in nulla lacinia luctus. Quisque feugiat elit urna, gravida sodales dui cursus et. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed tellus eros, iaculis id rutrum sit amet, tincidunt blandit nunc. Pellentesque et porta sem, non vestibulum metus. Sed posuere mauris ut ipsum dictum consequat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis viverra consectetur sem, et blandit turpis tincidunt id.</p>
+			</div>
+
+
+		</ng-template>
+		<ng-template [ngSwitchCase]="auth.AuthState.unauthorized">
+			<div class="flex flex-col grow shrink-0 pad-6 justify-center items-center p-10">
+			<h1>Please, login</h1>
+			<button mat-raised-button color="primary" (click)="loginform.open()">Login</button>
+		</div>
+		</ng-template>
+		<ng-template [ngSwitchCase]="auth.AuthState.pending">
+		</ng-template>
+	</ng-container>
+
 </div>

@@ -1,15 +1,23 @@
 <mat-toolbar class="flex justify-between">
-	<ng-container *ngIf="auth.userData$ | async as userData; else unauthorized">
-		<span class="flex flex-col">
+	<ng-container [ngSwitch]="auth.state$ | async">
+		<ng-template [ngSwitchCase]="auth.AuthState.pending">
 			<span>{{title | titlecase}}</span>
-			<span class="flex text-sm text-slate-500 items-center justify-center">
-				{{(userData!.email ?? "") | nameFromEmail}}
-			</span>
-		</span>
-		<button mat-raised-button color="primary" (click)="auth.SignOut()">Logout</button>
+		</ng-template>
+		<ng-template [ngSwitchCase]="auth.AuthState.authorized">
+			<ng-container *ngIf="auth.userData$ | async as userData;">
+				<span class="flex flex-col">
+					<span>{{title | titlecase}}</span>
+					<span class="flex text-sm text-slate-500 items-center justify-center">
+						{{(userData!.email ?? "") | nameFromEmail}}
+					</span>
+				</span>
+				<button mat-raised-button color="primary" (click)="auth.SignOut()">Logout</button>
+			</ng-container>
+		</ng-template>
+		<ng-template [ngSwitchCase]="auth.AuthState.unauthorized">	
+			<span>{{title | titlecase}}</span>
+			<button mat-raised-button color="primary" (click)="loginform.open()">Login</button>
+		</ng-template>
+
 	</ng-container>
-	<ng-template #unauthorized>	
-		<span>{{title | titlecase}}</span>
-		<button mat-raised-button color="primary" (click)="loginform.open()">Login</button>
-	</ng-template>
 </mat-toolbar>
