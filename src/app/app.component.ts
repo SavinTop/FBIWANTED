@@ -8,15 +8,10 @@ import { AuthService} from './auth/auth.service'
   styleUrls: ['./app.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent implements OnInit {
+export class AppComponent  {
   constructor(
   public auth: AuthService,
   public route: ActivatedRoute
   ){}
 
-  ngOnInit(): void {
-  	this.route.url.subscribe((val)=>{
-		console.log(val)
-	})
-  }
 }
