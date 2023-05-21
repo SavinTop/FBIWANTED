@@ -4,15 +4,20 @@ import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from './auth/auth.guard'
 
 const routes: Routes =[
-    { path: '', 
+    { path: 'home', 
 	  loadChildren: () => import('./pages/start/start.module').then(m => m.StartModule),
 	  },
     { path: 'settings',
 		loadChildren: () => import('./pages/settings/settings.module').then(m => m.SettingsModule),
-		canLoad:[AuthGuard], canActivate:[AuthGuard]},
+		canMatch:[AuthGuard]},
     { path: 'content', 
 		loadChildren: () => import('./pages/fbi-content/fbi-content.module').then(m => m.FbiContentModule),
-		canLoad: [AuthGuard], canActivate: [AuthGuard]}
+		canMatch: [AuthGuard]},
+	{
+		path:'',
+		pathMatch: 'full',
+		redirectTo:'home'
+	},
 ];
 
 @NgModule({
