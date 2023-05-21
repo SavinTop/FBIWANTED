@@ -8,6 +8,10 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon'
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatTableModule} from '@angular/material/table'
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatCardModule} from '@angular/material/card';
+import {MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
   declarations: [],
@@ -20,7 +24,11 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatSidenavModule,
 	MatIconModule,
 	MatProgressSpinnerModule,
-	MatProgressBarModule
+	MatProgressBarModule,
+	MatTableModule,
+	MatPaginatorModule,
+	MatCardModule,
+	MatDividerModule
   ],
   exports:[
 	MatToolbarModule,
@@ -30,7 +38,11 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatSidenavModule,
 	MatIconModule,
 	MatProgressSpinnerModule,
-	MatProgressBarModule
+	MatProgressBarModule,
+	MatTableModule,
+	MatPaginatorModule,
+	MatCardModule,
+	MatDividerModule
   ]
 })
 export class MaterialModule { }

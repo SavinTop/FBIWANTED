@@ -1,0 +1,27 @@
+<ng-container *ngIf="data">
+<table mat-table [dataSource]="data.items">
+
+	<mat-text-column name="title"></mat-text-column>
+	<mat-text-column name="status"></mat-text-column>
+	<mat-text-column name="nationality"></mat-text-column>
+	<mat-text-column name="sex"></mat-text-column>
+	<mat-text-column name="race"></mat-text-column>
+	<mat-text-column name="eyes"></mat-text-column>
+	<mat-text-column name="hair"></mat-text-column>
+	<mat-text-column name="build"></mat-text-column>
+<tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky: true"></tr>
+  <tr 
+	  (click)="handleRowClick(row)"
+	  mat-row 
+	  *matRowDef="let row; columns: columnsToDisplay;"></tr>
+</table>
+<mat-paginator [length]="data.total"
+			  [pageIndex]="data.page-1"
+              [pageSize]="data.items.length"
+              [pageSizeOptions]="[5, 10, 25, 100]"
+			  (page)="handlePageEvent($event)"
+              aria-label="Select page">
+</mat-paginator>
+
+</ng-container>
+

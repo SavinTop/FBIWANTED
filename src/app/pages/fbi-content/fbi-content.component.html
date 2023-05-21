@@ -1,1 +1,4 @@
-<p>fbi-content works!</p>
+<div class="flex m-6" *ngIf="api.wantedList | async as wantedList">
+<app-wanted-table class="overflow-y-scroll w-full" [data]="wantedList" (onPerson)="changePerson($event)"></app-wanted-table>
+<app-wanted-item class="" [person]="pickedPerson"></app-wanted-item>
+</div>

@@ -7,6 +7,7 @@ import { HeaderModule } from './header/header.module';
 import {MaterialModule} from './material/material.module'
 import { SharedModule } from './shared/shared/shared.module';
 import {AppRoutingModule} from './app-routing.module';
+import {HttpClientModule} from '@angular/common/http';
 
 
 
@@ -21,7 +22,8 @@ import {AppRoutingModule} from './app-routing.module';
 	AppRoutingModule,
     HeaderModule,
     MaterialModule,
-    SharedModule
+    SharedModule,
+	HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

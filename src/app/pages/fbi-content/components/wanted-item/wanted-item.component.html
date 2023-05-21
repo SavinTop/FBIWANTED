@@ -1,0 +1,26 @@
+<mat-card *ngIf="person">
+	<mat-card-header>
+		<mat-card-title>{{person.title}}</mat-card-title>
+
+	</mat-card-header>
+	<mat-card-content>
+		<img mat-card-image *ngIf="person.images?.length" [src]="person.images[0].original">
+		<div *ngIf="person.age_min || person.age_max"><b>Age</b>
+			<p>
+			
+			<span *ngIf="person.age_min!==person.age_max; else sameAge">{{person.age_min?person.age_min:'-inf'}}-{{person.age_max?person.age_max:'+inf'}}</span>		
+			<ng-template #sameAge>
+				{{person.age_max}}
+			</ng-template>
+			</p>
+		</div>
+		<div *ngIf="person.description"><b>Description</b><p>{{person.description}}</p></div>
+		<div *ngIf="person.remarks" [innerHTML]="'<b>Remarks</b>'+person.remarks"></div>
+		<div *ngIf="person.dates_of_birth_used?.length">
+		<b>Dates of birth used: </b>
+		<ol>
+			<li *ngFor="let date of person.dates_of_birth_used">{{date}}</li>
+		</ol>
+		</div>
+	</mat-card-content>
+</mat-card>
