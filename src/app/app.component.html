@@ -2,13 +2,13 @@
 <mat-drawer-container class="min-h-full">
 	<mat-drawer mode="side" opened *ngIf="(auth.state$ | async) === auth.AuthState.authorized">
 		<div class="flex flex-col gap-2">
-			<a mat-icon-button color="primary" routerLink="/">
+			<a mat-icon-button [color]="rlahome.isActive?'primary':''" routerLink="/home"  routerLinkActive #rlahome="routerLinkActive"> 
 				<mat-icon aria-hidden="false" fontIcon="home"></mat-icon>
 			</a>
-			<a mat-icon-button color="primary" routerLink="/content">
+			<a mat-icon-button [color]="rlacon.isActive?'primary':''" routerLink="/content" routerLinkActive #rlacon="routerLinkActive">
 				<mat-icon aria-hidden="false" fontIcon="description"></mat-icon>
 			</a>
-			<a mat-icon-button color="primary" routerLink="/settings">
+			<a mat-icon-button [color]="rlaset.isActive?'primary':''" routerLink="/settings" routerLinkActive #rlaset="routerLinkActive">
 				<mat-icon aria-hidden="false" fontIcon="settings"></mat-icon>
 			</a>
 
