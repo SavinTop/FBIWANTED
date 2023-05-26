@@ -1,6 +1,8 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import {WantedItem} from './models/wanted-item';
 import {FbiapiService} from './services/fbiapi.service';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { WantedList } from './models/wanted-list';
 
 @Component({
   selector: 'app-fbi-content',
@@ -8,7 +10,8 @@ import {FbiapiService} from './services/fbiapi.service';
   styleUrls: ['./fbi-content.component.css']
 })
 export class FbiContentComponent implements OnInit {
-	pickedPerson: WantedItem | null = null
+	pickedPerson = new BehaviorSubject<WantedItem | null>(null)
+	wantedList = new Observable<WantedList>()
 
 	constructor(
 	public api: FbiapiService,
@@ -18,14 +21,18 @@ export class FbiContentComponent implements OnInit {
 	}
 	
 	ngOnInit(): void {
-		this.api.updateWantedList(1, 50)
-		this.api.wantedList.subscribe(el=>{
-			console.log(el)
-			this.pickedPerson = el.items[0]
-		})
+		this.onPageChange({pageIndex: 1, pageSize: 25})
 	}
 
 	changePerson(row: WantedItem) : void{
-		this.pickedPerson = row
+		this.pickedPerson.next(row)
+	}
+
+	onPageChange(value: {pageIndex: number, pageSize:number}){
+		this.wantedList = this.api.requestWantedList(value.pageIndex, value.pageSize).pipe(
+			tap((list)=>{
+				this.pickedPerson.next(list.items.at(0) ?? null)
+			})
+		)
 	}
 }

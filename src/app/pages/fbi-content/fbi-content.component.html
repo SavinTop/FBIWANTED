@@ -1,4 +1,11 @@
-<div class="flex m-6" *ngIf="api.wantedList | async as wantedList">
-<app-wanted-table class="overflow-y-scroll w-full" [data]="wantedList" (onPerson)="changePerson($event)"></app-wanted-table>
-<app-wanted-item class="" [person]="pickedPerson"></app-wanted-item>
+<div class="flex m-6 gap-2" *ngIf="wantedList | async as wl; else loading">
+    <div class="w-full">
+        <app-wanted-table [data]="wl" (onPerson)="changePerson($event)" (onPageChange)="onPageChange($event)"></app-wanted-table>
+    </div>
+    <div class="sticky top-0">
+        <app-wanted-item *ngIf="pickedPerson | async as person" [person]="person"></app-wanted-item>
+    </div>
 </div>
+<ng-template #loading>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-template>

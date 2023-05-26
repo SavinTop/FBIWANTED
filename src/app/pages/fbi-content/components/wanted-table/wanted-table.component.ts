@@ -12,13 +12,16 @@ import {WantedItem} from '../../models/wanted-item';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WantedTableComponent {
-	columnsToDisplay = ['title','status','sex', 'race','eyes','hair']
+	columnsToDisplay = ['title','sex', 'race','eyes','hair']
 
 	@Input()
 	data: WantedList|null = null
 
 	@Output()
 	onPerson = new EventEmitter<WantedItem>()
+
+	@Output()
+	onPageChange = new EventEmitter<{pageIndex:number, pageSize: number}>()
 
 	constructor(public api:FbiapiService,
 				public cd: ChangeDetectorRef
@@ -27,7 +30,7 @@ export class WantedTableComponent {
 	}
 
 	handlePageEvent($event: PageEvent){
-		this.api.updateWantedList($event.pageIndex+1, $event.pageSize)
+		this.onPageChange.emit({pageIndex: $event.pageIndex+1, pageSize: $event.pageSize})
 	}
 
 	handleRowClick($row: WantedItem){
