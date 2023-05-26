@@ -11,10 +11,6 @@ export class FbiapiService  {
 
 	constructor(private http: HttpClient) { }
 
-	private _wantedList$ = new ReplaySubject<Observable<WantedList>>(1)
-	private _pipedList = this._wantedList$.pipe(switchMap(el=>el))
-
-
 	requestWantedList(page: number, pageSize: number){
 		return this.http.get<WantedList>("https://api.fbi.gov/wanted/v1/list", {
 			params: {
@@ -24,13 +20,5 @@ export class FbiapiService  {
 		})
 
 	}
-
-	get wantedList(){
-		return 	this._pipedList}
-
-	updateWantedList(page: number, pageSize: number ){
-		this._wantedList$.next(this.requestWantedList(page, pageSize))
-	}
-
 
 }
