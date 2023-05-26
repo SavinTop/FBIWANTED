@@ -1,16 +1,24 @@
-import { Component, Input, OnChanges, SimpleChange, SimpleChanges } from '@angular/core';
-import {WantedItem} from '../../models/wanted-item';
+import { Component, ElementRef, Input, OnChanges, SimpleChange, SimpleChanges, ViewChild } from '@angular/core';
+import { WantedItem } from '../../models/wanted-item';
 
 @Component({
-  selector: 'app-wanted-item',
-  templateUrl: './wanted-item.component.html',
-  styleUrls: ['./wanted-item.component.css']
+	selector: 'app-wanted-item',
+	templateUrl: './wanted-item.component.html',
+	styleUrls: ['./wanted-item.component.css']
 })
 export class WantedItemComponent implements OnChanges {
 	@Input() person: WantedItem | null = null
-	
-	ngOnChanges(changes: SimpleChanges){
-		console.log(this.person)
+	@ViewChild("personImg") imgPerson!: ElementRef
+	imgLoading = false
+
+	ngOnChanges(changes: SimpleChanges) {
+		if (changes['person']?.previousValue !== changes['person']?.currentValue) {
+			this.imgLoading = true
+			this.imgPerson.nativeElement.src = ""
+		}
 	}
-	
+
+	imageLoadHandler(): void {
+		this.imgLoading = false
+	}
 }
