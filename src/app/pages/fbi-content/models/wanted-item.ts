@@ -18,6 +18,7 @@ export interface WantedItem {
 	age_max: number
 	build: string
 	hair: string
+	eyes: string
 	dates_of_birth_used: string[]
 	remarks: string
 }
