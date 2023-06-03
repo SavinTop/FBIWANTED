@@ -25,7 +25,7 @@ export class MultipleDataPickerComponent implements OnInit, ControlValueAccessor
   disabled: boolean = false
   touched: boolean = false
 
-  onChange = (dates: IDate[]) => {};
+  onChange = (dates: Date[]) => {};
 
   onTouched = () => {};
 
@@ -33,6 +33,10 @@ export class MultipleDataPickerComponent implements OnInit, ControlValueAccessor
   constructor(private cd: ChangeDetectorRef){}
 
   writeValue(dates: Date[]): void {
+    if(!dates){
+      this.dates = []
+      return
+    }
     this.dates = dates.map((el, index)=>({date: el, id:index}))
   }
   registerOnChange(fn: any): void {
@@ -48,7 +52,7 @@ export class MultipleDataPickerComponent implements OnInit, ControlValueAccessor
   addDataPicker(date:Date = new Date()){
     this.dates.push({id:this.lastId, date})
     this.lastId++
-    this.onChange(this.dates)
+    this.onChange(this.dates.map(el=>el.date))
   }
 
   ngOnInit(): void {
@@ -68,6 +72,6 @@ export class MultipleDataPickerComponent implements OnInit, ControlValueAccessor
     })
     if(realIndex === -1) throw new Error("There is no such index")
     this.dates.splice(realIndex, 1)
-    this.onChange(this.dates)
+    this.onChange(this.dates.map(el=>el.date))
   }
 }
