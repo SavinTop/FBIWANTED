@@ -1,24 +1,46 @@
 <ng-container *ngIf="data">
 	<div class="table-container">
 	  <mat-table [dataSource]="data.items">
-		<mat-text-column name="title"></mat-text-column>
-		<mat-text-column name="sex"></mat-text-column>
-		<mat-text-column name="race"></mat-text-column>
-		<mat-text-column name="eyes"></mat-text-column>
-		<mat-text-column name="hair"></mat-text-column>
-		<tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky: true"></tr>
-		<tr
+		<ng-container matColumnDef="title" sticky>
+			<mat-header-cell mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+			<mat-cell *matCellDef="let element"> {{element.title}} </mat-cell>
+		  </ng-container>
+
+		  <ng-container matColumnDef="sex" >
+			<mat-header-cell *matHeaderCellDef> Sex </mat-header-cell>
+			<mat-cell *matCellDef="let element"> {{element.sex}} </mat-cell>
+		  </ng-container>
+		  <ng-container matColumnDef="race" >
+			<mat-header-cell *matHeaderCellDef> Race </mat-header-cell>
+			<mat-cell *matCellDef="let element"> {{element.race}} </mat-cell>
+		  </ng-container>
+		  <ng-container matColumnDef="eyes" >
+			<mat-header-cell *matHeaderCellDef> Eyes </mat-header-cell>
+			<mat-cell *matCellDef="let element"> {{element.eyes}} </mat-cell>
+		  </ng-container>
+		  <ng-container matColumnDef="hair" >
+			<mat-header-cell *matHeaderCellDef> Hair </mat-header-cell>
+			<mat-cell *matCellDef="let element"> {{element.hair}} </mat-cell>
+		  </ng-container>
+		  <ng-container matColumnDef="edited">
+			<mat-header-cell *matHeaderCellDef > Edited </mat-header-cell>
+			<mat-cell *matCellDef="let element">
+			  <button mat-button *ngIf="editedUids.has(element.uid)" (click)="editedClicked.emit(element.uid)"><mat-icon>edit</mat-icon></button>
+			</mat-cell>
+		  </ng-container>
+		<mat-header-row *matHeaderRowDef="columnsToDisplay; sticky: true"></mat-header-row>
+		<mat-row
 		  (click)="handleRowClick(row)"
 		  mat-row
 		  *matRowDef="let row; columns: columnsToDisplay"
-		></tr>
+		></mat-row>
 	  </mat-table>
 	</div>
 	<mat-paginator
 	  [length]="data.total"
 	  [pageIndex]="data.page - 1"
 	  [pageSize]="data.items.length"
-	  [pageSizeOptions]="[5, 10, 25, 100]"
+	  [pageSizeOptions]="[5, 10, 25, 50]"
 	  (page)="handlePageEvent($event)"
 	  aria-label="Select page"
 	>
