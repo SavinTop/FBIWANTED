@@ -1,0 +1,12 @@
+<div class="flex flex-col w-fit">
+  <div *ngFor="let date of dates" class="flex justify-center items-center">
+       <mat-form-field>
+        <input matInput [matDatepicker]="picker" [id]="'id'+date.id" [(ngModel)]="date.date">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    
+      <button mat-button (click)="removeDataPicker(date.id)" style="margin-bottom: 22px;" type="button"><mat-icon>remove</mat-icon></button>
+    </div>
+    <button mat-button (click)="addDataPicker()" style="min-width: 300px" type="button"><mat-icon>add</mat-icon></button>
+</div>
