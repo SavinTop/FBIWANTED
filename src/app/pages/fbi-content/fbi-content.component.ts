@@ -1,38 +1,25 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ContentChild, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import {WantedItem} from './models/wanted-item';
 import {FbiapiService} from './services/fbiapi.service';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, debounce, debounceTime, distinctUntilChanged, first, fromEvent, tap } from 'rxjs';
 import { WantedList } from './models/wanted-list';
+import { WantedTableComponent } from './components/wanted-table/wanted-table.component';
+import { ActivatedRoute, Routes } from '@angular/router';
+import { EditedItem } from './models/edit-queue-item';
+import { MatDialog } from '@angular/material/dialog';
+import { EditWantedItemComponent } from './components/edit-wanted-item/edit-wanted-item.component';
+import { EditDialogComponent } from './components/edit-dialog/edit-dialog.component';
+import { EditedTabComponent } from './components/tabs/edited-tab/edited-tab.component';
+import { WantedTabComponent } from './components/tabs/wanted-tab/wanted-tab.component';
+
 
 @Component({
   selector: 'app-fbi-content',
   templateUrl: './fbi-content.component.html',
-  styleUrls: ['./fbi-content.component.css']
+  styleUrls: ['./fbi-content.component.css'],
 })
-export class FbiContentComponent implements OnInit {
-	pickedPerson = new BehaviorSubject<WantedItem | null>(null)
-	wantedList = new Observable<WantedList>()
+export class FbiContentComponent {
+	editedList$ = new Observable<WantedItem[]>()
 
-	constructor(
-	public api: FbiapiService,
-	public cd: ChangeDetectorRef
-	){
-		
-	}
-	
-	ngOnInit(): void {
-		this.onPageChange({pageIndex: 1, pageSize: 25})
-	}
-
-	changePerson(row: WantedItem) : void{
-		this.pickedPerson.next(row)
-	}
-
-	onPageChange(value: {pageIndex: number, pageSize:number}){
-		this.wantedList = this.api.requestWantedList(value.pageIndex, value.pageSize).pipe(
-			tap((list)=>{
-				this.pickedPerson.next(list.items.at(0) ?? null)
-			})
-		)
-	}
+	editedSet = new Set<string>()
 }
