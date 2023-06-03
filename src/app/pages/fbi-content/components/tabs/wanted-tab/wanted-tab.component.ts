@@ -52,6 +52,7 @@ export class WantedTabComponent implements OnInit, OnDestroy {
 
 		this.api.getEditQueueList().subscribe(list=>{
 			this.editedSet = new Set<string>(list.map(el=>el.uid))
+			this.cd.detectChanges()
 		})
 
 
