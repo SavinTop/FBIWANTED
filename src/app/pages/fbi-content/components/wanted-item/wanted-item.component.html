@@ -7,8 +7,7 @@
 		
 		<img mat-card-image 
 		*ngIf="person.images?.length" 
-		[src]="person.images[0].original" 
-		(load)="imageLoadHandler()" #personImg>
+		[src]="person.images[0].original">
 		
 		
 		<div *ngIf="person.age_min || person.age_max"><b>Age</b>
@@ -28,5 +27,6 @@
 			<li *ngFor="let date of person.dates_of_birth_used">{{date}}</li>
 		</ol>
 		</div>
+		<button mat-button color="primary" *ngIf="editable" (click)="openEditDialog()">Edit</button>
 	</mat-card-content>
 </mat-card>

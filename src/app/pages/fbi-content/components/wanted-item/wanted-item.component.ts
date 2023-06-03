@@ -1,24 +1,35 @@
-import { Component, ElementRef, Input, OnChanges, SimpleChange, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnChanges, Output, SimpleChange, SimpleChanges, ViewChild } from '@angular/core';
 import { WantedItem } from '../../models/wanted-item';
+import { MatDialog } from '@angular/material/dialog';
+import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
+import { first } from 'rxjs/operators';
+import { FbiapiService } from '../../services/fbiapi.service';
 
 @Component({
 	selector: 'app-wanted-item',
 	templateUrl: './wanted-item.component.html',
 	styleUrls: ['./wanted-item.component.css']
 })
-export class WantedItemComponent implements OnChanges {
+export class WantedItemComponent {
 	@Input() person: WantedItem | null = null
-	@ViewChild("personImg") imgPerson!: ElementRef
-	imgLoading = false
+	@Input() editable: boolean = false
 
-	ngOnChanges(changes: SimpleChanges) {
-		if (changes['person']?.previousValue !== changes['person']?.currentValue) {
-			this.imgLoading = true
-			this.imgPerson.nativeElement.src = ""
-		}
+	@Output() personEdited = new EventEmitter()
+
+	constructor(
+		private dialog: MatDialog,
+		private api: FbiapiService
+	){
+
 	}
 
-	imageLoadHandler(): void {
-		this.imgLoading = false
+	openEditDialog(){
+		this.dialog.open(EditDialogComponent, {
+			data: this.person
+		}).afterClosed().pipe(first()).subscribe((newItem=>{
+			if(!newItem) return
+			this.api.markForEdit(newItem).subscribe()
+			this.personEdited.emit(newItem)
+		}))
 	}
 }
