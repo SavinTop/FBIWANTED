@@ -5,7 +5,6 @@ import { BehaviorSubject, Observable, debounce, debounceTime, distinctUntilChang
 import { WantedList } from './models/wanted-list';
 import { WantedTableComponent } from './components/wanted-table/wanted-table.component';
 import { ActivatedRoute, Routes } from '@angular/router';
-import { EditedItem } from './models/edit-queue-item';
 import { MatDialog } from '@angular/material/dialog';
 import { EditWantedItemComponent } from './components/edit-wanted-item/edit-wanted-item.component';
 import { EditDialogComponent } from './components/edit-dialog/edit-dialog.component';

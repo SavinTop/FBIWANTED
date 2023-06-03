@@ -4,7 +4,6 @@ import { FbiapiService } from '../../services/fbiapi.service';
 import { PageEvent } from '@angular/material/paginator';
 import {WantedList} from '../../models/wanted-list';
 import {WantedItem} from '../../models/wanted-item';
-import { EditedItem } from '../../models/edit-queue-item';
 
 @Component({
   selector: 'app-wanted-table',
