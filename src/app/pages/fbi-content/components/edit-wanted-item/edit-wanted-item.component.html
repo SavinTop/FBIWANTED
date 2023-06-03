@@ -1,0 +1,37 @@
+<form [formGroup]="itemEditForm" class="flex flex-col">
+
+    <mat-form-field>
+        <mat-label for="title">Title: </mat-label>
+        <input matInput id="title" type="text" formControlName="title">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Sex: </mat-label>
+        <mat-select id="sex" type="text" formControlName="sex">
+            <mat-option value="male">Male</mat-option>
+            <mat-option value="female">Female</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label for="race">Race: </mat-label>
+        <input matInput id="race" type="text" formControlName="race">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label for="eyes">Eyes: </mat-label>
+        <input matInput id="eyes" type="text" formControlName="eyes">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label for="hair">Hair: </mat-label>
+        <input matInput id="hair" type="text" formControlName="hair">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label for="description">Description: </mat-label>
+        <textarea matInput id="description" type="text" formControlName="description"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label for="remarks">Remarks: </mat-label>
+        <textarea matInput id="remarks" type="text" formControlName="remarks"></textarea>
+    </mat-form-field>
+    <mat-label for="birthdays">Birthdays: </mat-label>
+    <app-multiple-data-picker id="birthdays" formControlName="dates_of_birth_used"></app-multiple-data-picker>
+
+</form>
