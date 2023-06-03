@@ -1,0 +1,35 @@
+<ng-container *ngIf="data | async as d; else loading">
+	<div class="flex m-6 gap-2">
+		<div class="table-container w-full">
+			<mat-table [dataSource]="d">
+				<ng-container matColumnDef="title" sticky>
+					<mat-header-cell mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+					<mat-cell *matCellDef="let element"> {{element.title}} </mat-cell>
+				</ng-container>
+
+				<ng-container matColumnDef="sex">
+					<mat-header-cell *matHeaderCellDef> Sex </mat-header-cell>
+					<mat-cell *matCellDef="let element"> {{element.sex}} </mat-cell>
+				</ng-container>
+				<ng-container matColumnDef="race">
+					<mat-header-cell *matHeaderCellDef> Race </mat-header-cell>
+					<mat-cell *matCellDef="let element"> {{element.race}} </mat-cell>
+				</ng-container>
+				<ng-container matColumnDef="eyes">
+					<mat-header-cell *matHeaderCellDef> Eyes </mat-header-cell>
+					<mat-cell *matCellDef="let element"> {{element.eyes}} </mat-cell>
+				</ng-container>
+				<ng-container matColumnDef="hair">
+					<mat-header-cell *matHeaderCellDef> Hair </mat-header-cell>
+					<mat-cell *matCellDef="let element"> {{element.hair}} </mat-cell>
+				</ng-container>
+				<mat-header-row *matHeaderRowDef="columnsToDisplay; sticky: true"></mat-header-row>
+				<mat-row (click)="changePerson(row)" mat-row *matRowDef="let row; columns: columnsToDisplay"></mat-row>
+			</mat-table>
+		</div>
+		<app-wanted-item [person]="currentRow"></app-wanted-item>
+	</div>
+</ng-container>
+<ng-template #loading>
+	<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-template>

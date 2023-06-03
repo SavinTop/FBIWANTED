@@ -1,11 +1,9 @@
-<div class="flex m-6 gap-2" *ngIf="wantedList | async as wl; else loading">
-    <div class="w-full">
-        <app-wanted-table [data]="wl" (onPerson)="changePerson($event)" (onPageChange)="onPageChange($event)"></app-wanted-table>
-    </div>
-    <div class="sticky top-0">
-        <app-wanted-item *ngIf="pickedPerson | async as person" [person]="person"></app-wanted-item>
-    </div>
-</div>
-<ng-template #loading>
-    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-</ng-template>
+
+
+<nav mat-tab-nav-bar [tabPanel]="tabPanel">
+  <a mat-tab-link routerLink="wanted" [active]="rlaWanted.isActive" routerLinkActive #rlaWanted='routerLinkActive'>Wanted</a>
+  <a mat-tab-link routerLink="edited" [active]="rlaEdited.isActive" routerLinkActive #rlaEdited='routerLinkActive'>Edited</a>
+</nav>  
+<mat-tab-nav-panel #tabPanel>
+  <router-outlet></router-outlet>
+</mat-tab-nav-panel>

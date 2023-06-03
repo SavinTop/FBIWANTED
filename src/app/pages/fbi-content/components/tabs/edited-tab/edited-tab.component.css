@@ -1,0 +1,23 @@
+
+.mat-mdc-row .mat-mdc-cell {
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    cursor: pointer;
+  }
+  
+  .mat-mdc-row:hover .mat-mdc-cell {
+    border-color: currentColor;
+  }
+  
+  .mat-mdc-table {
+    width: 100%;
+    overflow: auto;
+    display: table;
+  }
+  
+  .table-container {
+    display: block;
+    max-height: 500px;
+    overflow-y: scroll;
+  }
+  

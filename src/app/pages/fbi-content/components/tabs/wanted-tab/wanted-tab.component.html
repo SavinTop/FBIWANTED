@@ -1,0 +1,28 @@
+<div>
+  <div>
+    <mat-form-field>
+      <mat-label>Search</mat-label>
+      <input matInput type="text" [(ngModel)]="value" />
+      <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+
+
+  <div class="flex m-6 gap-2" *ngIf="wantedList$ | async as wl; else loading">
+
+    <div class="w-full">
+      <app-wanted-table [data]="wl" [editedUids]="editedSet" (onPerson)="changePerson($event)"
+        (onPageChange)="onPageChange($event)" (editedClicked)="editedClicked($event)"></app-wanted-table>
+    </div>
+    <div class="sticky top-0">
+      <app-wanted-item *ngIf="pickedPerson$ | async as person" [person]="person" [editable]="true"
+        (personEdited)="updateEditedList($event)"></app-wanted-item>
+    </div>
+
+  </div>
+  <ng-template #loading>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </ng-template>
+</div>
