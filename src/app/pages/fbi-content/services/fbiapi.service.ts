@@ -18,7 +18,14 @@ export class FbiapiService  {
 				pageSize,
 				title
 			}
-		})
+		}).pipe(
+			tap(list=>{
+				
+				list.items = list.items.map(el=>{
+					return {...el, remarks: el.remarks?.replace(/<\/?[^>]+(>|$)/g, "")}
+				})
+			})
+		)
 
 	}
 

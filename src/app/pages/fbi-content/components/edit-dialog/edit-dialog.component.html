@@ -1,8 +1,9 @@
+<b mat-dialog-title>Edit dialog</b>
 <mat-dialog-content>
     <div class="container">
         <mat-stepper>
             <mat-step>
-                <ng-template matStepLabel>Fill out your name</ng-template>
+                <ng-template matStepLabel>Edit things out</ng-template>
                 <div class="p-10">
                     <app-edit-wanted-item (submit)="submit($event)" [formData]="dialogData" #editForm></app-edit-wanted-item>
                 </div>

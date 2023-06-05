@@ -47,14 +47,10 @@ export class WantedTabComponent implements OnInit, OnDestroy {
 	}
 	
 	ngOnInit(): void {
-
-		
-
 		this.api.getEditQueueList().subscribe(list=>{
 			this.editedSet = new Set<string>(list.map(el=>el.uid))
 			this.cd.detectChanges()
 		})
-
 
 		this.wantedList$ = this.api.requestWantedList(1, this.DEFAULT_PAGE_SIZE, '')
 
@@ -70,18 +66,16 @@ export class WantedTabComponent implements OnInit, OnDestroy {
 			  }
 			  if(!list.items || !list.items.length) return
 			  this.changePerson(list.items[0])
-
-			this.searchBar$.pipe(
-				skip(1),
-				debounceTime(500),
-				distinctUntilChanged()
-			).subscribe(el=>{
-				this.onPageChange({pageIndex: 1, pageSize: this.wtc?.currentPageSize ?? this.DEFAULT_PAGE_SIZE })
-				this.cd.detectChanges()
-			})
 		})
 
-		
+		this.searchBar$.pipe(
+			skip(1),
+			debounceTime(500),
+			distinctUntilChanged()
+		).subscribe(el=>{
+			this.onPageChange({pageIndex: 1, pageSize: this.wtc?.currentPageSize ?? this.DEFAULT_PAGE_SIZE })
+			this.cd.detectChanges()
+		})
 	}
 
 	changePerson(row: WantedItem) : void{
